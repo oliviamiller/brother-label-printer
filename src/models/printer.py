@@ -60,10 +60,18 @@ class Printer(Generic, EasyResource):
         img = Image.new("RGB", (h, w), color="white")  # rotated 90 degrees
         draw = ImageDraw.Draw(img)
         font_size = max(20, w // 2)
-        try:
-            font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", font_size)
-        except OSError:
-            font = ImageFont.load_default()
+        # find a font that fits within the label dimensions
+        font = ImageFont.load_default()
+        while font_size >= 10:
+            try:
+                f = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf", font_size)
+            except OSError:
+                break
+            bbox = draw.textbbox((0, 0), text, font=f)
+            if (bbox[2] - bbox[0]) <= h and (bbox[3] - bbox[1]) <= w:
+                font = f
+                break
+            font_size -= 2
         bbox = draw.textbbox((0, 0), text, font=font)
         x = (h - (bbox[2] - bbox[0])) // 2
         y = (w - (bbox[3] - bbox[1])) // 2
