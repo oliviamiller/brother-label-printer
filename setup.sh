@@ -29,6 +29,12 @@ if ! python3 -m venv $VENV_NAME >/dev/null 2>&1; then
     fi
 fi
 
+if command -v apt-get >/dev/null; then
+    SUDO=""
+    if command -v sudo >/dev/null; then SUDO="sudo"; fi
+    $SUDO apt-get install -qqy libjpeg-dev zlib1g-dev >/dev/null 2>&1
+fi
+
 echo "Virtualenv found/created. Installing/upgrading Python packages..."
 if ! [ -f .installed ]; then
     if ! $PYTHON -m pip install -r requirements.txt -Uqq; then
