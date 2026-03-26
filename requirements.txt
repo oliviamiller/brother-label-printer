@@ -2,5 +2,5 @@
 viam-sdk==0.72.0
 typing-extensions
 brother_ql
-Pillow>=9.0,<10
+Pillow
 pyusb

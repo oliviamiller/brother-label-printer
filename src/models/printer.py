@@ -2,6 +2,10 @@ from typing import (Any, ClassVar, Dict, Mapping, Optional, Sequence, Tuple)
 
 from typing_extensions import Self
 from PIL import Image, ImageDraw, ImageFont
+
+# brother_ql uses PIL.Image.ANTIALIAS which was removed in Pillow 10+
+if not hasattr(Image, "ANTIALIAS"):
+    Image.ANTIALIAS = Image.LANCZOS
 from brother_ql.raster import BrotherQLRaster
 from brother_ql.conversion import convert
 from brother_ql.backends.helpers import send
