@@ -16,6 +16,7 @@ from viam.resource.base import ResourceBase
 from viam.resource.easy_resource import EasyResource
 from viam.resource.types import Model, ModelFamily
 from viam.utils import ValueTypes
+from brother_ql.labels import LabelsManager
 
 
 class Printer(Generic, EasyResource):
@@ -54,8 +55,7 @@ class Printer(Generic, EasyResource):
         self.label_size = attrs["label_size"].string_value
 
     def _create_image(self, text: str) -> Image.Image:
-        from brother_ql.labels import LabelsManager
-        label = LabelsManager().get_element_by_identifier(self.label_size)
+        label = next(e for e in LabelsManager().iter_elements() if e.identifier == self.label_size)
         w, h = label.dots_printable
         img = Image.new("RGB", (h, w), color="white")  # rotated 90 degrees
         draw = ImageDraw.Draw(img)
