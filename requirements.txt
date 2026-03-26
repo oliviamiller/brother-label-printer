@@ -1,0 +1,6 @@
+
+viam-sdk==0.72.0
+typing-extensions
+brother_ql
+Pillow<10
+pyusb
