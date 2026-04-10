@@ -1,5 +1,14 @@
 #!/bin/sh
+echo "Running brother-label-printer/first_run.sh"
 
+# macOS: the native IOKit USB helper is bundled inside the PyInstaller
+# executable — no libusb or runtime compilation needed.
+if [ "$(uname)" = "Darwin" ]; then
+    echo "macOS detected — using bundled native USB backend."
+    exit 0
+fi
+
+# Linux: install libusb for the pyusb backend.
 if command -v apt-get >/dev/null; then
     SUDO=""
     if command -v sudo >/dev/null; then SUDO="sudo"; fi

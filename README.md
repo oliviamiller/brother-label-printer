@@ -5,6 +5,7 @@ A Viam module for printing text labels on Brother QL series label printers over 
 ## Models
 
 - [`viam:brother-label-printer:printer`](viam_brother-label-printer_printer.md) - Generic component for printing text labels on a Brother QL printer via USB.
+- [`viam:brother-label-printer:discovery`](viam_brother-label-printer_discovery.md) - Discovery service that auto-detects Brother QL printers connected via USB and suggests printer component configurations.
 
 ## Requirements
 

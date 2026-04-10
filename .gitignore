@@ -163,6 +163,11 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+# Compiled macOS USB helper binary
+src/macos/usb_printer
+
 # Viam reload files
 .VIAM_RELOAD_ARCHIVE.tar.gz
 reload-*/
+
+.DS_Store
